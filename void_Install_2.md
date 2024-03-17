@@ -1,10 +1,11 @@
+
 * * *
 # WORK IN PROGRESS HERE #
 # This part is going to change ...
 # Some parts are not what I have done 
 * * *
 
-# This part is for me and in french
+# This part is in french
 
 # Définir Bash pour root et mon utilisateur (bt)
 
@@ -13,14 +14,18 @@ su - bt -c 'chsh -s /usr/bin/bash'
 
 
 # Installer Base OS
+
 ## Void Doc Full Disk Encryption
+
 [Void FDE](https://docs.voidlinux.org/installation/guides/fde.html "FDE")
  Pour formatter le disque utiliser Void_install_1.sh
  
 ## Définition du temps (Optionnel)
+
 ln -sf /usr/share/zoneinfo/America/Montreal /etc/localtime
 
 ## Définir la Langue fr_CA
+
 sed -i "s@#fr_CA.utf8@fr_CA.utf8@g" /etc/default/libc-locales
 vi /etc/locale.conf
 
@@ -30,30 +35,76 @@ LC_ALL=fr_CA.UTF-8
 
 xbps-reconfigure -f glibc-locales
 
-xbps-install -Syv poppler-data \
-qt5-translations qt6-translations \
-firefox-i18n-fr thunderbird-i18n-fr \
-aspell-fr hunspell-fr_FR \
-libreoffice-i18n-fr \
-manpages-fr
+xbps-install -Syv :
+	poppler-data
+	qt5-translations qt6-translations
+	firefox-i18n-fr thunderbird-i18n-fr
+	aspell-fr hunspell-fr_FR
+	libreoffice-i18n-fr
+	manpages-fr
 
 ## Logiciels installés sur l'image de base
-xbps-install -Syv pipewire alsa-pipewire \
-rtkit libspa-bluetooth \
-xorg-minimal wayland \
-octoxbps \
-libarchive tar xz p7zip unzip zip gzip lz4 lzo zstd \
-linux-firmware linux-firmware-network sof-firmware \
-cpupower spectre-meltdown-checker \
-chrony cronie nano firefox firefox-i18n-fr
+
+gpm htop inxi neofetch
+git
+gnome-keyring
+rtkit 
+libarchive 
+tar xz p7zip unzip zip gzip lz4 lzo zstd
+linux-firmware linux-firmware-network
+cpupower spectre-meltdown-checker
+chrony cronie firefox firefox-i18n-fr
+polkit
+polkit-gnome
+tlp
+tracker
+tty-clock
+Thunar
+xbps octoxbps 
+NetworkManager
+xdg-desktop-portal
+xorg
+libinput
+libinput-gestures
 
 # Installer Wayland + Wayfire 
 
-...
+	Waybar
+	way-displays
+	wayfire
+	wayfire-plugins-extra
+	wayland
+	wayland-protocols
+	wdisplays
+	wlogout
+	wlsunset
+	wofi
+	swayidle
+	swaylock
+	grim
+	gammastep
+	brightnessctl
+	clipman
+	dex
+	elogind
+	flatpak
+	alacritty
+	mako
+
 
 # Les Thèmes,fontes,icones, bref: L'apparence
 
-...
+Adapta
+awoken-icons
+breeze-cursors
+font-awesome5
+font-fira-otf
+gtkdatabox3
+noto-fonts-cjk
+nwg-launchers
+nwg-look
+paper-icon-theme
+
 
 
 # Configuration de l'audio PulseAudio,Pipewire,WirePlumber
@@ -62,18 +113,28 @@ mkdir -p /etc/pipewire/pipewire.conf.d
 ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
 ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
 
+pavucontrol-qt
+playerctl
+pulseaudio
+pipewire 
+alsa-pipewire
+wireplumber
+kanshi
+mpv
+mpv-mpris
+
 # GPU AMD
 
-xbps-install -Syv void-repo-multilib
-
-xbps-install -Syv linux-firmware-amd \
-mesa-dri mesa-dri-32bit \
-mesa-vdpau mesa-vdpau-32bit \
-mesa-vaapi mesa-vaapi-32bit \
-mesa-vulkan-radeon mesa-vulkan-radeon-32bit \
-libva libva-32bit \
-libva-vdpau-driver libva-vdpau-driver-32bit \
-mesa-demos glxinfo \
+void-repo-multilib
+linux-firmware-amd
+mesa
+mesa-dri 
+mesa-vdpau
+mesa-vaapi
+mesa-vulkan-radeon
+libva libva-32bit
+libva-vdpau-driver
+mesa-demos glxinfo
 xf86-video-amdgpu
 
 
@@ -164,4 +225,5 @@ xi discord
 
 # Installer des logiciels utiles
 
+backup :  borg
 
