@@ -77,6 +77,7 @@ libinput-gestures
 	wayland-protocols
 	wdisplays
 	wlogout
+ 	wlr-randr
 	wlsunset
 	wofi
 	swayidle
