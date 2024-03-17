@@ -13,7 +13,31 @@ su - bt -c 'chsh -s /usr/bin/bash'
 
 
 # Installer Base OS
+## Void Doc Full Disk Encryption
+[Void FDE](https://docs.voidlinux.org/installation/guides/fde.html "FDE")
+ Pour formatter le disque utiliser Void_install_1.sh
+ 
+## Définition du temps (Optionnel)
+ln -sf /usr/share/zoneinfo/America/Montreal /etc/localtime
 
+## Définir la Langue fr_CA
+sed -i "s@#fr_CA.utf8@fr_CA.utf8@g" /etc/default/libc-locales
+vi /etc/locale.conf
+
+LANG=fr_CA.UTF-8
+LC_COLLATE=C
+LC_ALL=fr_CA.UTF-8
+
+xbps-reconfigure -f glibc-locales
+
+xbps-install -Syv poppler-data \
+qt5-translations qt6-translations \
+firefox-i18n-fr thunderbird-i18n-fr \
+aspell-fr hunspell-fr_FR \
+libreoffice-i18n-fr \
+manpages-fr
+
+## Logiciels installés sur l'image de base
 xbps-install -Syv pipewire alsa-pipewire \
 rtkit libspa-bluetooth \
 xorg-minimal wayland \
@@ -23,20 +47,16 @@ linux-firmware linux-firmware-network sof-firmware \
 cpupower spectre-meltdown-checker \
 chrony cronie nano firefox firefox-i18n-fr
 
-# Installer Wayland
+# Installer Wayland + Wayfire 
 
 ...
 
-# Installer wayfire 
-
-...
-
-# Les fontes de caractères
+# Les Thèmes,fontes,icones, bref: L'apparence
 
 ...
 
 
-# Configuration Pipewire
+# Configuration de l'audio PulseAudio,Pipewire,WirePlumber
 
 mkdir -p /etc/pipewire/pipewire.conf.d
 ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
@@ -69,26 +89,7 @@ ln -s /etc/sv/rtkit /var/service/
 ln -s /var/lib/dbus/machine-id /etc/machine-id
 ln -s /usr/share/applications/pipewire.desktop /etc/xdg/autostart/pipewire.desktop
 
-Définition du temps (Optionnel)
-ln -sf /usr/share/zoneinfo/America/Montreal /etc/localtime
 
-Définir la Langue FR (Optionnel)
-sed -i "s@#fr_CA.utf8@fr_CA.utf8@g" /etc/default/libc-locales
-
-nano /etc/locale.conf
-
-LANG=fr_CA.UTF-8
-LC_COLLATE=C
-LC_ALL=fr_CA.UTF-8
-
-xbps-reconfigure -f glibc-locales
-
-xbps-install -Syv poppler-data \
-qt5-translations qt6-translations \
-firefox-i18n-fr thunderbird-i18n-fr \
-aspell-fr hunspell-fr_FR \
-libreoffice-i18n-fr \
-manpages-fr
 
 # Création des dossiers Home
 
@@ -101,8 +102,7 @@ xbps-query --regex -Rs '^linux[0-9.]+-[0-9._]+'
 xbps-install -Syv linux6.7
 
 
-# Installer les dépendances Wine (Optionnel)
-xbps-install -Syv wine
+# Installer les dépendances
 
 xbps-install -Syv alsa-plugins alsa-plugins-32bit alsa-lib alsa-lib-32bit \
 FAudio FAudio-32bit \
