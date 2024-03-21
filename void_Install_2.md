@@ -1,4 +1,3 @@
-
 * * *
 # WORK IN PROGRESS HERE #
 # This part is going to change ...
@@ -77,7 +76,6 @@ libinput-gestures
 	wayland-protocols
 	wdisplays
 	wlogout
- 	wlr-randr
 	wlsunset
 	wofi
 	swayidle
@@ -98,14 +96,25 @@ libinput-gestures
 Adapta
 awoken-icons
 breeze-cursors
+cantarell-fonts
+console-setup
 font-awesome5
 font-fira-otf
+grub-terminus
 gtkdatabox3
 noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-ttf
+noto-fonts-ttf-extra
 nwg-launchers
 nwg-look
 paper-icon-theme
 
+# Configuration des fontes une meilleure précision
+
+rm /usr/share/fontconfig/conf.avail/70-yes-bitmaps.conf
+ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+xbps-reconfigure fontconfig
 
 
 # Configuration de l'audio PulseAudio,Pipewire,WirePlumber
@@ -227,4 +236,3 @@ xi discord
 # Installer des logiciels utiles
 
 backup :  borg
-
